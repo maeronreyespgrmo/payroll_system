@@ -50,20 +50,20 @@ const WidgetsDropdown = (props) => {
               </span>
             </>
           }
-          title="Users"
-          action={
-            <CDropdown alignment="end">
-              <CDropdownToggle color="transparent" caret={false} className="text-white p-0">
-                <CIcon icon={cilOptions} />
-              </CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem>Action</CDropdownItem>
-                <CDropdownItem>Another action</CDropdownItem>
-                <CDropdownItem>Something else here...</CDropdownItem>
-                <CDropdownItem disabled>Disabled action</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          }
+          title="Employees"
+          // action={
+          //   <CDropdown alignment="end">
+          //     <CDropdownToggle color="transparent" caret={false} className="text-white p-0">
+          //       <CIcon icon={cilOptions} />
+          //     </CDropdownToggle>
+          //     <CDropdownMenu>
+          //       <CDropdownItem>Action</CDropdownItem>
+          //       <CDropdownItem>Another action</CDropdownItem>
+          //       <CDropdownItem>Something else here...</CDropdownItem>
+          //       <CDropdownItem disabled>Disabled action</CDropdownItem>
+          //     </CDropdownMenu>
+          //   </CDropdown>
+          // }
           chart={
             <CChartLine
               ref={widgetChartRef1}
@@ -129,7 +129,7 @@ const WidgetsDropdown = (props) => {
           }
         />
       </CCol>
-      <CCol sm={6} xl={4} xxl={3}>
+      {/* <CCol sm={6} xl={4} xxl={3}>
         <CWidgetStatsA
           color="info"
           value={
@@ -383,7 +383,7 @@ const WidgetsDropdown = (props) => {
             />
           }
         />
-      </CCol>
+      </CCol> */}
     </CRow>
   )
 }
