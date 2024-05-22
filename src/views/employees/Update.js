@@ -12,44 +12,30 @@ const [employeeValue, setEmployeeValue] = useState('');
 const [fullnameValue, setFullnameValue] = useState('');
 const [positionValue, setPositionValue] = useState('');
 const [showToast, setShowToast] = React.useState(false);
+const [formValues, setFormValues] = useState({}); // State to hold form values
 
 const toggleToast = () => setShowToast(!showToast);
 
-const handleSubmit = (event) => {
-event.preventDefault();
-// Here you can add your form submission logic
-setShowToast(true)
-
-// Retrieve the current array from localStorage
 const existingArray = JSON.parse(localStorage.getItem('employeesArray')) || [];
-
-
 const updateItemById = (id, newData) => {
 return existingArray.map(item => item.employee_no === id ? { ...item, ...newData } : item);
 };
+const updatedArray = updateItemById('232');
 
-const updatedArray = updateItemById(232, { fullname: 'Updated Name', position: 28 });
-
-dataArray = updatedArray; 
-localStorage.setItem('employeesArray', JSON.stringify(dataArray));
-console.log('Form submitted',updatedArray);
+console.log(updatedArray)
 
 
+
+const handleInputChange = (event) => {
+  const { name, value } = event.target;
+  setFormValues({ ...formValues, [name]: value });
 };
 
-const employeevaluechange = (event) => {
-    setEmployeeValue(event.target.value); // Update the state with the input value
+const handleSubmit = (event) => {
+  event.preventDefault();
+  // Access the values of all text boxes in the form
+  console.log('Form values:', formValues);
 };
-
-const fullnamevaluechange = (event) => {
-    setFullnameValue(event.target.value); // Update the state with the input value
-};
-
-const positionvaluechange = (event) => {
-    setPositionValue(event.target.value); // Update the state with the input value
-};
-
-
 
 return (
 
@@ -67,13 +53,15 @@ return (
 <strong>Update Employees</strong>
 </CCardHeader>
 <CCardBody>
+{updatedArray.map((value, index) => (
+<React.Fragment key={value.employee_no}>
 <CForm onSubmit={handleSubmit}>
 <div className="mb-3">
 <CFormLabel htmlFor="exampleFormControlInput1">Employee</CFormLabel>
 <CFormInput
 type="text"
-value={employeeValue} 
-onChange={employeevaluechange} 
+value={value.employee_no}
+onChange={handleInputChange} 
 id="exampleFormControlInput1"
 placeholder="Employee No"
 />
@@ -82,8 +70,8 @@ placeholder="Employee No"
 <CFormLabel htmlFor="exampleFormControlInput1">Fullname</CFormLabel>
 <CFormInput
 type="text"
-value={fullnameValue} 
-onChange={fullnamevaluechange} 
+value={value.fullname}
+onChange={handleInputChange}
 id="exampleFormControlInput1"
 placeholder="Fullname"
 />
@@ -92,8 +80,8 @@ placeholder="Fullname"
 <CFormLabel htmlFor="exampleFormControlInput1">Position</CFormLabel>
 <CFormInput
 type="text"
-value={positionValue} 
-onChange={positionvaluechange}
+value={value.position}
+onChange={handleInputChange}
 id="exampleFormControlInput1"   
 placeholder="Position"
 />
@@ -107,6 +95,9 @@ placeholder="Position"
 <CButton color="secondary" href="#/employees/create">Clear Information</CButton>
 </div> */}
 </CForm>
+</React.Fragment>
+))}
+
 </CCardBody>
 </CCard>
 </CCol>

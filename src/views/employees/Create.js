@@ -34,7 +34,7 @@ position: positionValue
 existingArray.push(newObject);
 // Store the updated array back into localStorage
 localStorage.setItem('employeesArray', JSON.stringify(existingArray));
-console.log('Form submitted',emailValue,fullnameValue,positionValue);
+console.log('Form submitted',employeeValue,fullnameValue,positionValue);
 
 
 };
