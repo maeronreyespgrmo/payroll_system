@@ -49,12 +49,7 @@ const _nav = [
     to: '/theme/typography',
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
-  {
-    component: CNavItem,
-    name: 'Logs',
-    to: '/login',
-    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
-  },
+
 ]
 
 export default _nav

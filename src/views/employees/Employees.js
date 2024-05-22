@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { CCard,CButton, CCardBody, CCardHeader, CCol, CFormCheck, CFormSwitch, CRow,  CTable,
 CTableBody,
+
 CTableCaption,
 CTableDataCell,
 CTableHead,
@@ -17,11 +18,11 @@ CForm,
 CFormInput,
 CFormLabel,
 CFormTextarea } from '@coreui/react'
+import { NavLink } from 'react-router-dom'
 import { DocsExample } from 'src/components'
 
 const Employees = () => {
-const [visible, setVisible] = useState(false)
-
+const data = JSON.parse(localStorage.getItem('employeesArray')) || [];
 return (
 
 <CRow>
@@ -31,52 +32,32 @@ return (
 <strong>Employee Management</strong>
 </CCardHeader>
 <CCardBody>
-<CButton color="primary" onClick={() => setVisible(!visible)}>Create New</CButton>
-<CModal visible={visible} onClose={() => setVisible(false)}>
-<CModalHeader>
-<CModalTitle>Modal title</CModalTitle>
-</CModalHeader>
-<CModalBody>
-
-              <CForm>
-                <div className="mb-3">
-                  <CFormLabel htmlFor="exampleFormControlInput1">Email address</CFormLabel>
-                  <CFormInput
-                    type="email"
-                    id="exampleFormControlInput1"
-                    placeholder="name@example.com"
-                  />
-                </div>
-                <div className="mb-3">
-                  <CFormLabel htmlFor="exampleFormControlTextarea1">Example textarea</CFormLabel>
-                  <CFormTextarea id="exampleFormControlTextarea1" rows={3}></CFormTextarea>
-                </div>
-              </CForm>
-
-</CModalBody>
-<CModalFooter>
-<CButton color="secondary" onClick={() => setVisible(false)}>
-Close
-</CButton>
-<CButton color="primary">Save changes</CButton>
-</CModalFooter>
-</CModal>
+<CButton color="primary" href="#/employees/create">Create New</CButton>
 <CTable>
 <CTableHead>
 <CTableRow>
-<CTableHeaderCell scope="col">ID No</CTableHeaderCell>
-<CTableHeaderCell scope="col">Name</CTableHeaderCell>
-<CTableHeaderCell scope="col">Position</CTableHeaderCell>
+<CTableHeaderCell scope="col">Employee No</CTableHeaderCell>
+<CTableHeaderCell scope="col">Employee Name</CTableHeaderCell>
+<CTableHeaderCell scope="col">Office</CTableHeaderCell>
+<CTableHeaderCell scope="col">Position Status</CTableHeaderCell>
 <CTableHeaderCell scope="col">Action</CTableHeaderCell>
 </CTableRow>
 </CTableHead>
 <CTableBody>
+{data.map((user, index) => (
 <CTableRow>
-<CTableHeaderCell scope="row">1</CTableHeaderCell>
-<CTableDataCell>Mark</CTableDataCell>
-<CTableDataCell>Otto</CTableDataCell>
-<CTableDataCell><CButton color="secondary" onClick={() => setVisible(!visible)}>Update</CButton><CButton color="danger">Delete</CButton></CTableDataCell>
+  <React.Fragment key={user.id}>
+    <CTableDataCell scope="row">{index + 1}</CTableDataCell>
+    <CTableDataCell>{user.employee_no}</CTableDataCell>
+    <CTableDataCell>{user.fullname}</CTableDataCell>
+    <CTableDataCell>{user.position}</CTableDataCell>
+    <CTableDataCell>
+      <CButton color="secondary" href="#/employees/update">Update</CButton>
+      <CButton color="danger">Delete</CButton>
+    </CTableDataCell>
+  </React.Fragment>
 </CTableRow>
+))}
 </CTableBody>
 </CTable>
 </CCardBody>
